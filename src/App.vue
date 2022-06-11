@@ -1,15 +1,16 @@
 <template>
-  <ul>
-    <resource-item-vue v-for="res in storedResources" :key="res.id" :title="res.title" :link="res.link" :description="res.description"></resource-item-vue>
-  </ul>
+  <the-header-vue :title="title"></the-header-vue>
+  <stored-resources-vue :resources="storedResources"></stored-resources-vue>
 </template>
 
 <script>
-import ResourceItemVue from './components/learning-resources/ResourceItem.vue';
+import StoredResourcesVue from './components/learning-resources/StoredResources.vue';
+import TheHeaderVue from './components/layouts/TheHeader.vue';
 export default {
-  components: { ResourceItemVue },
+  components: { StoredResourcesVue, TheHeaderVue },
   data() {
     return {
+      title: 'Best Useful Resources',
       storedResources: [
         {
           id: 'official guide',
@@ -28,3 +29,19 @@ export default {
   },
 };
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>
