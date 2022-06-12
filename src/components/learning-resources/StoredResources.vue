@@ -13,8 +13,8 @@
 <script>
 import ResourceItemVue from './ResourceItem.vue';
 export default {
+  inject: ['resources'],
   components: { ResourceItemVue },
-  props: ['resources'],
   date() {
     return {};
   },
