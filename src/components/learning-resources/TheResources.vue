@@ -46,6 +46,7 @@ export default {
   provide() {
     return {
       resources: this.storedResources,
+      addResources: this.addResources
     };
   },
   methods: {
@@ -53,6 +54,19 @@ export default {
       this.selectedTab = tab;
       console.log(`this.selectedTap: ${this.selectedTab}`);
     },
+    addResources(title, description, link){
+      const newResources = {
+        id: new Date().toISOString(),
+        title: title,
+        description: description,
+        link: link
+      }
+      this.storedResources.unshift(newResources);
+
+      // below code for to return resources page
+      this.selectedTab= 'stored-resources-vue'
+
+    }
   },
 };
 </script>

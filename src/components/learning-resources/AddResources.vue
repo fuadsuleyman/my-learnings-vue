@@ -1,17 +1,22 @@
 <template>
   <base-card>
-    <form>
+    <form @submit.prevent="submitResources">
       <div class="form-control">
         <label for="title">Title</label>
-        <input type="text" id="title" name="title" />
+        <input type="text" id="title" name="title" v-model="title" />
       </div>
       <div class="form-control">
-        <label for="description">Title</label>
-        <textarea id="description" name="description" rows="3"></textarea>
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="3"
+          v-model="description"
+        ></textarea>
       </div>
       <div class="form-control">
         <label for="link">Link</label>
-        <input type="url" id="linkn" name="link" />
+        <input type="url" id="linkn" name="link" v-model="link" />
       </div>
       <div>
         <base-button type="submit">Add Resources</base-button>
@@ -19,6 +24,24 @@
     </form>
   </base-card>
 </template>
+
+<script>
+export default {
+  inject: ['addResources'],
+  data() {
+    return {
+      title: '',
+      description: '',
+      link: '',
+    };
+  },
+  methods: {
+    submitResources() {
+      this.addResources(this.title, this.description, this.link);
+    },
+  },
+};
+</script>
 
 <style>
 label {
