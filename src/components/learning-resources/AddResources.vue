@@ -37,6 +37,14 @@ export default {
   },
   methods: {
     submitResources() {
+      if (
+        this.title.trim() === '' ||
+        this.description.trim() === '' ||
+        this.link.trim() === ''
+      ) {
+        alert('Ay Brat Inputlar boshdu');
+        return;
+      }
       this.addResources(this.title, this.description, this.link);
     },
   },
