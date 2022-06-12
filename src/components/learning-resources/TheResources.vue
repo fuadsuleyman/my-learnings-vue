@@ -1,13 +1,19 @@
 <template>
   <base-card>
-    <base-button @click="changeTabs('stored-resources-vue')" :mode="storedResButtonMode"
+    <base-button
+      @click="changeTabs('stored-resources-vue')"
+      :mode="storedResButtonMode"
       >Stored Resource</base-button
     >
-    <base-button @click="changeTabs('add-resources-vue')" :mode="addResButtonMode"
+    <base-button
+      @click="changeTabs('add-resources-vue')"
+      :mode="addResButtonMode"
       >Add Resources</base-button
     >
   </base-card>
-  <component :is="selectedTab"></component>
+  <keep-alive>
+    <component :is="selectedTab"></component>
+  </keep-alive>
 </template>
 
 <script>
@@ -36,17 +42,17 @@ export default {
     };
   },
   computed: {
-    storedResButtonMode(){
-      return this.selectedTab === 'stored-resources-vue' ? null : 'flat'
+    storedResButtonMode() {
+      return this.selectedTab === 'stored-resources-vue' ? null : 'flat';
     },
-    addResButtonMode(){
-      return this.selectedTab === 'add-resources-vue' ? null : 'flat'
-    }
+    addResButtonMode() {
+      return this.selectedTab === 'add-resources-vue' ? null : 'flat';
+    },
   },
   provide() {
     return {
       resources: this.storedResources,
-      addResources: this.addResources
+      addResources: this.addResources,
     };
   },
   methods: {
@@ -54,19 +60,18 @@ export default {
       this.selectedTab = tab;
       console.log(`this.selectedTap: ${this.selectedTab}`);
     },
-    addResources(title, description, link){
+    addResources(title, description, link) {
       const newResources = {
         id: new Date().toISOString(),
         title: title,
         description: description,
-        link: link
-      }
+        link: link,
+      };
       this.storedResources.unshift(newResources);
 
       // below code for to return resources page
-      this.selectedTab= 'stored-resources-vue'
-
-    }
+      this.selectedTab = 'stored-resources-vue';
+    },
   },
 };
 </script>
