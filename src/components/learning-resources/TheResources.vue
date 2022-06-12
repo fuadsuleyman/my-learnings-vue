@@ -1,9 +1,9 @@
 <template>
   <base-card>
-    <base-button @click="changeTabs('stored-resources-vue')"
+    <base-button @click="changeTabs('stored-resources-vue')" :mode="storedResButtonMode"
       >Stored Resource</base-button
     >
-    <base-button @click="changeTabs('add-resources-vue')"
+    <base-button @click="changeTabs('add-resources-vue')" :mode="addResButtonMode"
       >Add Resources</base-button
     >
   </base-card>
@@ -34,6 +34,14 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    storedResButtonMode(){
+      return this.selectedTab === 'stored-resources-vue' ? null : 'flat'
+    },
+    addResButtonMode(){
+      return this.selectedTab === 'add-resources-vue' ? null : 'flat'
+    }
   },
   provide() {
     return {
