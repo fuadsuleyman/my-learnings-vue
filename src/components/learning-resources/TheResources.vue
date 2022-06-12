@@ -53,6 +53,7 @@ export default {
     return {
       resources: this.storedResources,
       addResources: this.addResources,
+      deleteResource: this.deleteResource
     };
   },
   methods: {
@@ -72,6 +73,10 @@ export default {
       // below code for to return resources page
       this.selectedTab = 'stored-resources-vue';
     },
+    deleteResource(resourceId){
+      const resIndex = this.storedResources.findIndex(res => res.id === resourceId)
+      this.storedResources.splice(resIndex, 1)
+    }
   },
 };
 </script>
