@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div @click="$emit('close')"></div>
   <dialog open>
     <header>
       <slot name="header">
@@ -10,15 +10,21 @@
       <slot></slot>
     </section>
     <menu>
-      <slot name="action"></slot>
+      <slot name="action">
+          <!-- below line is default if user not enter anything into action slot -->
+        <base-button @click="$emit('close')">Close</base-button>
+      </slot>
     </menu>
   </dialog>
 </template>
 
 <script>
+import BaseButton from './BaseButton.vue';
 export default {
+  emits: ['close'],
+  components: { BaseButton },
   props: {
-    title: { 
+    title: {
       type: String,
       required: false,
     },
