@@ -18,7 +18,7 @@
 <script>
 export default {
   props: {
-    title: {
+    title: { 
       type: String,
       required: false,
     },

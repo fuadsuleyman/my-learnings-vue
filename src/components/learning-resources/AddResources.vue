@@ -1,4 +1,13 @@
 <template>
+  <base-dialog v-if="inputIsInvalid" title="Invalid Input">
+    <template v-slot:default>
+      <p>Unfortunately some of the inputs or inputs are empty</p>
+      <p>Please check all inputs!</p>
+    </template>
+    <template v-slot:action>
+      <base-button @click="closeDialog"> Okay </base-button>
+    </template>
+  </base-dialog>
   <base-card>
     <form @submit.prevent="submitResources">
       <div class="form-control">
@@ -26,13 +35,16 @@
 </template>
 
 <script>
+import BaseButton from '../UI/BaseButton.vue';
 export default {
+  components: { BaseButton },
   inject: ['addResources'],
   data() {
     return {
       title: '',
       description: '',
       link: '',
+      inputIsInvalid: false,
     };
   },
   methods: {
@@ -42,10 +54,13 @@ export default {
         this.description.trim() === '' ||
         this.link.trim() === ''
       ) {
-        alert('Ay Brat Inputlar boshdu');
+        this.inputIsInvalid = true;
         return;
       }
       this.addResources(this.title, this.description, this.link);
+    },
+    closeDialog() {
+      this.inputIsInvalid = false;
     },
   },
 };
